@@ -1,0 +1,56 @@
+name: publish to PyPI
+
+# Trusted Publishing (OIDC). NO TOKEN IS STORED ANYWHERE — GitHub mints a short-lived
+# credential for this workflow, and PyPI accepts it because the project's publisher settings
+# name this repository, this workflow file and this environment.
+#
+# ONE-TIME SETUP, WHICH ONLY THE ACCOUNT OWNER CAN DO (it is a browser action):
+#   1. https://pypi.org/manage/account/publishing/
+#   2. "Add a new pending publisher":
+#        PyPI project name : <the name in pyproject.toml>
+#        Owner             : nickharris808
+#        Repository        : <this repo>
+#        Workflow name     : release.yml
+#        Environment       : pypi
+#   3. In this repo: Settings -> Environments -> New environment -> "pypi"
+#   4. Push a tag: git tag v0.1.0 && git push origin v0.1.0
+#
+# Until step 2 is done this workflow is inert: it builds and checks the artifacts on every tag
+# and the publish step fails closed with an authentication error rather than half-publishing.
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Build
+        run: |
+          python -m pip install --upgrade pip build twine
+          python -m build
+      - name: Check the artifacts before anything is uploaded
+        run: python -m twine check --strict dist/*
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write          # the ONLY credential; no secret is read
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - uses: pypa/gh-action-pypi-publish@release/v1

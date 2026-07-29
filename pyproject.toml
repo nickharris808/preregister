@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "preregister"
+version = "0.1.0"
+description = "Seal an experiment plan — and refuse to seal one whose conclusion is already fixed"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Nick Harris" }]
+keywords = ["preregistration", "reproducibility", "falsifiability", "experiments", "science",
+            "verification", "abstention"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering",
+]
+dependencies = []
+
+[project.optional-dependencies]
+yaml = ["PyYAML>=5.1"]
+dev = ["pytest>=7", "PyYAML>=5.1"]
+
+[project.scripts]
+preregister = "preregister.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/nickharris808/preregister"
+Source = "https://github.com/nickharris808/preregister"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

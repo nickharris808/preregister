@@ -1,0 +1,11 @@
+{
+  "name": "a rule that is falsifiable and still a bad experiment",
+  "hypothesis": "the detector beats chance",
+  "decision_rule": "auc > 0.5",
+  "metrics": { "auc": { "lo": 0.0, "hi": 1.0 } },
+  "notes": [
+    "preregister reports FALSIFIABLE here, and that is the correct answer to the question it",
+    "asks. Both branches are reachable. It says NOTHING about whether n is large enough to tell",
+    "them apart -- that is a power calculation, and this tool does not do one."
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "batch-invariance (as actually shipped, and wrong)",
+  "hypothesis": "batch composition changes greedy decoding output",
+  "finding": "batch composition perturbs greedy output",
+  "null": "greedy output is invariant to batch composition",
+  "decision_rule": "argmax_flips > 0",
+  "metrics": {
+    "argmax_flips": { "type": "integer", "lo": 0, "hi": 0 }
+  },
+  "notes": [
+    "The run was configured with prompt_logprobs=0, which makes argmax_flips identically zero.",
+    "The plan was sealed before data and published. It could only ever report the null.",
+    "The support below is the honest one: this is what the metric COULD take under that config."
+  ]
+}

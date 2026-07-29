@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: If you use this software, please cite it as below.
+title: "preregister: refuses to seal a plan whose conclusion is already fixed"
+abstract: >-
+  refuses to seal a plan whose conclusion is already fixed
+authors:
+  - family-names: Harris
+    given-names: Nick
+repository-code: "https://github.com/nickharris808/preregister"
+url: "https://github.com/nickharris808/preregister"
+license: Apache-2.0
+type: software
+keywords:
+  - verification
+  - abstention
+  - reproducibility

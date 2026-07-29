@@ -1,0 +1,16 @@
+{
+  "name": "cross-tenant KV reuse",
+  "hypothesis": "a second tenant can observe cache state created by the first",
+  "finding": "cross-tenant reuse was observed with a passing positive control",
+  "null": "no cross-tenant reuse observed",
+  "decision_rule": "leaked_tokens > 0 and positive_control_tokens > 0",
+  "metrics": {
+    "leaked_tokens":          { "type": "integer", "lo": 0, "hi": 4096 },
+    "positive_control_tokens": { "type": "integer", "lo": 0, "hi": 4096 }
+  },
+  "notes": [
+    "The positive control is inside the rule on purpose: a zero leak means nothing unless the",
+    "probe demonstrably CAN see reuse when reuse is present. Without that conjunct a broken",
+    "probe reports a clean system."
+  ]
+}
