@@ -19,10 +19,14 @@ seal a plan whose finding — or whose null — can never fire.**
 
 ## Install
 
+**Not yet on PyPI.** The command below is the one that works today. It installs from this repository, pinned to a tag.
+
 ```bash
-pip install preregister                # zero runtime dependencies
-pip install "preregister[yaml]"        # + PyYAML, only if your specs are YAML
+pip install "preregister @ git+https://github.com/nickharris808/preregister@v0.1.0"
+pip install "preregister[yaml] @ git+https://github.com/nickharris808/preregister@v0.1.0"   # + PyYAML, only if your specs are YAML
 ```
+
+`pip install preregister` is the intended command once the name is published. **It 404s today**, which is why it is not the first step above. The tag is pinned rather than `@main` so a reader installs the exact code this README documents.
 
 ## 30-second quickstart
 
